@@ -1,0 +1,82 @@
+1. man -k [keyword]
+Shell commands: man man
+
+2. /usr/local/cs/bin/cp
+/usr/bin/sh
+Shell commands: which cp
+which sh (TA said "which" is better than whereis)
+
+3. w - Show who is logged on and what they are doing
+[ - cannot find manual page
+X - network-transparent window  system
+Shell commands: man find
+find / '?' -executable (lots of results but I just took the ones from sensible directories, ignoring ones like perl and eclipse)
+man [
+man X
+(Using "man -a ?" I also get O (generic interface to perl compiler backends) and  B (perl compiler))
+
+4. /etc/alternatives/emacs
+Shell commans: man ln
+man symlink
+man readlink
+readlink /usr/bin/emacs
+
+5. GNU Emacs 24.5.1 for emacs
+GNU Emacs 23.1.1 for /usr/bin/emacs
+Using readlink with "-m", it shows that the canoncal file for the second one is /usr/bin/emacs-23.1.  
+Shell commands: man emacs and man readlink
+emacs --version
+/etc/alternatives/emacs --version
+readlink -m /usr/bin/emacs
+
+6. g+o: give other users in the file's group the permissions of the users that are neither the owner nor the users in the file's group (aka permissions of the users not in the file's group)
+o-x: remove the permission to execute (or search from directories) from other users not in the file's group
+Shell commands: man chmod
+
+7.
+No directories under (inclusive) /usr/local/cs were modified within the last 30 days
+Shell commands: man find
+find /usr/local/cs -type d -mtime -30
+(using the expression "-depth -type d -print -mtime 30", all directories under /usr/local/cs are printed, so I assume that "-depth -type d -mtime 30" is just not returning anything. In fact, replacing -mtime with -atime prints stuff [access time])
+
+8.
+294 Symbolic links
+Shell commands: which find
+man -k count
+man wc
+find /usr/bin/ -type l -fprint links
+wc -l links
+
+9. libxkbfile.so.1.0.2
+Shell commands: man ls
+ls /usr/lib64 -a -l -t
+
+10. LC_* environmental variables supplied by localedef
+Shell commands: man locale
+man -k locale
+man localedef
+
+11. downcase-region and downcase-word
+Emacs commands: C-h + F (Info-goto-emacs-command-node)
+
+12.
+C-M-r isearch-backward-regexp
+C-M-s isearch-forward-regexp
+C-M-t transpose-sexps
+C-M-u backward-up-list
+C-M-v scroll-other-window
+Emacs commands: C-h + c (search commands bound to a key)
+
+13. C-g runs the command keyboard-quit (aka quits current command)
+Emacs commands: C-h + k (search command bound to a key and provide exact detail of what it does)
+
+14. yank is on C-y
+yank pastes the last stretch of killed text
+Emacs commands: C-h + w (search for keys bound to a command name)
+C-h + k (get description of command bound to a given key)
+
+15.
+C-x + d (dired in Emacs): shows all permissions, size, date, name of file (and what the folder structure is), and other data
+ls /usr/bin -l: shows the same type of list, although color is different
+Shell commands: ls /usr/bin -l
+Emacs comands: C-x + d /usr/bin (erased the default ~/)

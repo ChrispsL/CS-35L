@@ -1,0 +1,38 @@
+1) Get the coreutils-with-bug and build it (configure path locally)
+in utimens.h:2:5, error: conflicting types for 'futimens'
+	int futimens(int, char const *, struct timespec const [2])
+	extern int futimens(int __fd, const struct timespec __times[2]) __THROW
+
+2) Patch using coreutils.diff with -p0
+
+3) Running make now works, since the patch renamed 3 instances of futimens to coreutils_futimens.
+
+4) Reproduce bug:
+temp=$(mktemp -d)
+cd $temp
+touch -d '1918-11-11 11:00 GMT' wwi-armistice
+touch now
+sleep 1
+touch now1
+TZ=UTC0 $HOME/Desktop/CS35L/Assignment4/coreutils-with-bug/src/ls -lt --full-time wwi-armistice now now1
+Output:
+	-rw-r--r-- 1 lamc csugrad 0 1918-11-11 11:00:00.000000000 +0000 wwi-armistice
+	-rw-r--r-- 1 lamc csugrad 0 2018-05-05 07:50:15.887369729 +0000 now1
+	-rw-r--r-- 1 lamc csugrad 0 2018-05-05 07:50:10.745194816 +0000 now
+
+5) Looking at the code, the compare functions for time all goes to timespec_cmp in timespec.h
+Since arithmetic subtraction was making it overflow with such a large difference in dates, just change the comparison to straight compare-operators:
+int diff = a.tv_sec > b.tv_sec ? 1 : (a.tv_sec < b.tv_sec ? -1 : 0);
+
+6) Reconfigure and make (touch ls.c if needed to trigger a rebuild), then go back into temp directory. This time, the output:
+	-rw-r--r-- 1 lamc csugrad 0 2018-05-05 07:50:15.887369729 +0000 now1
+	-rw-r--r-- 1 lamc csugrad 0 2018-05-05 07:50:10.745194816 +0000 now
+	-rw-r--r-- 1 lamc csugrad 0 1918-11-11 11:00:00.000000000 +0000 wwi-armistice
+
+7) Make a patch file (from right above coreutils folder): diff -u coreutils-with-bug/lib/timespec.h timespec.h > lab4.diff
+Append changelog on top and change the directory of both the --++ changes to be coreutils-with-bug/lib/timespec.h
+
+8) Rebuild and test in $temp---the timespec.h is successfully changed and the output is the same as 6) (good)
+
+9) Without the $temp directory, the armistice file shows as 2054.
+This is because the SEASNet NFS uses unsigned timestamps and the LFS on Linux uses signed, so anything older than 1/1/1970 overflows

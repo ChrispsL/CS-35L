@@ -1,0 +1,95 @@
+1) Write tr2b.c and tr2u.c
+Compile gcc -o -std=c11 tr2b -g tr2b.c
+gcc -o -std=c11 tr2u -g tr2u.c
+
+2) Make a 5MB file (write 'a' to input.txt 5 million times)
+ls -l shows 5000000 May 12 15:46 input.txt
+
+3) strace to see system calls
+a. Copy 1 file to another
+strace -c ./tr2b 'a' 'b' < input.txt > u_output
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 72.29    0.000874           1       613           read
+ 18.44    0.000223           0       611           write
+  3.23    0.000039           4         9           mmap
+  2.15    0.000026           7         4           mprotect
+  1.41    0.000017           9         2           open
+  1.32    0.000016           4         4           fstat
+  0.74    0.000009           9         1           munmap
+  0.25    0.000003           3         1           arch_prctl
+  0.17    0.000002           1         2           close
+  0.00    0.000000           0         1           brk
+  0.00    0.000000           0         1         1 access
+  0.00    0.000000           0         1           execve
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.001209                  1250         1 total
+
+strace -c ./tr2u 'a' 'b' < input.txt > u_output
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 56.19   20.341947           4   5000000           write
+ 43.81   15.859853           3   5000002           read
+  0.00    0.000000           0         2           open
+  0.00    0.000000           0         2           close
+  0.00    0.000000           0         2           fstat
+  0.00    0.000000           0         7           mmap
+  0.00    0.000000           0         4           mprotect
+  0.00    0.000000           0         1           munmap
+  0.00    0.000000           0         1           brk
+  0.00    0.000000           0         1         1 access
+  0.00    0.000000           0         1           execve
+  0.00    0.000000           0         1           arch_prctl
+------ ----------- ----------- --------- --------- ----------------
+100.00   36.201800              10000024         1 total
+
+b. Copy 1 file to terminal
+strace -c ./tr2b 'a' 'b' < input.txt
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 92.65    0.012549           3      4883           write
+  6.19    0.000838           1       613           read
+  0.42    0.000057           6         9           mmap
+  0.20    0.000027           7         4           mprotect
+  0.15    0.000020          10         2           open
+  0.14    0.000019          19         1         1 access
+  0.12    0.000016           4         4           fstat
+  0.07    0.000010          10         1           munmap
+  0.04    0.000005           3         2           close
+  0.03    0.000004           4         1           arch_prctl
+  0.00    0.000000           0         1           brk
+  0.00    0.000000           0         1           execve
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.013545                  5522         1 total
+
+strace -c ./tr2u 'a' 'b' < input.txt
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 57.49   22.004789           4   5000000           write
+ 42.51   16.268627           3   5000002           read
+  0.00    0.000054          54         1         1 access
+  0.00    0.000047           7         7           mmap
+  0.00    0.000030           8         4           mprotect
+  0.00    0.000027          14         2           open
+  0.00    0.000010           5         2           fstat
+  0.00    0.000010          10         1           munmap
+  0.00    0.000007           4         2           close
+  0.00    0.000003           3         1           arch_prctl
+  0.00    0.000000           0         1           brk
+  0.00    0.000000           0         1           execve
+------ ----------- ----------- --------- --------- ----------------
+100.00   38.273604              10000024         1 total
+
+The unbuffered version takes way too long with all its system calls.
+Though, the buffered version uses more calls writing to terminal, while the unbuffered version uses the same amount.
+
+4) Time the two programs
+time ./tr2b 'a' 'b'  < input.txt > b_output
+real    0m0.200s
+user    0m0.146s
+sys     0m0.006s
+
+time ./tr2u 'a' 'b' < input.txt > u_output
+real    0m9.410s
+user    0m1.240s
+sys     0m8.125s

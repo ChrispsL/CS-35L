@@ -1,0 +1,87 @@
+1) Check C/POSIX locale. Change from US.UTF-8 to C by export LC_ALL='C'
+
+2) Copy /usr/share/dict/words to my assignment folder, use sort command to sort it
+
+3) Grab Assignment 2 html using wget http://web.cs.ucla.edu/classes/winter18/cs35L/assign/assign2.html
+
+4)
+tr -c 'A-Za-z' '[\n*]'
+   single words/letters, some with many lines in between them
+tr -cs 'A-Za-z' '[\n*]'
+   same thing as previous except no blank lines in between
+tr -cs 'A-Za-z' '[\n*]' | sort
+   same list of words/letters, but sorted (i.e. lots of "your" and "z" at the end)
+tr -cs 'A-Za-z' '[\n*]' | sort -u
+   shortened list of previous output because all duplicates were removed
+tr -cs 'A-Za-z' '[\n*]' | sort -u | comm - words
+   long list of words that are in the words file but not in the html file
+tr -cs 'A-Za-z' '[\n*]' | sort -u | comm -23 - words
+   much shorter list of webpage-words that aren't in the words file (e.g. wget, lau, html)
+
+5) Grab page with Hawaiian words with wget http://mauimapp.com/moolelo/hwnwdseng.htm
+
+6)
+#! /bin/sh
+#Create a script "buildwords":
+       # buildwords -- scrape Hawaiian words from a given webpage
+#Get the table of all the words (between the <tr> and </tr>'s)
+       tr '\n' '|' | grep -o '<tr>.*</tr>' | tr '|' '\n' |
+#Remove the <tr> to </td> tags (i.e. remove all the first words) and leftover </tr> tags:
+       sed '/<tr>/,/<\/td>/d' | sed '/<\/tr>/d' |
+#Clean up formatting (e.g. replacing <u>a</u> and lower-casing):
+      tr '[[:upper:]]' '[[:lower:]]' | sed 's/<u>\([[:lower:]]\)<\/u>/\1/g' | tr '`' "'" | tr -s ', ' ' ' |
+#Get all the words (spell-check/filtered) then sort them:
+    grep -Eo ">[pk'mnwlhaeiou ]+<" | tr -d '><' | tr -s ' ' '\n' | sort -u
+
+7)
+chmod +x buildwords
+cat hawwords.htm | ./buildwords > hwords
+
+8)
+Misspelled English on webpage:
+   cat assign2.html | tr '[[:upper:]]' '[[:lower:]]' | tr -cs 'A-Za-z' '[\n*]' | sort -u | comm -23 - words | wc -w
+   172 words misspelled
+Misspelled Hawaiian on webpage:
+  cat assign2.html | tr '[[:upper:]]' '[[:lower:]]' | tr -cs 'A-Za-z' '[\n*]' | sort -u | comm -23 - hwords | wc -w
+  404 words misspelled
+Misspelled as English but not as Hawaiian:
+   (store 2 previous misspelling-checks in files)
+   cat assign2.html | tr '[[:upper:]]' '[[:lower:]]' | tr -cs 'A-Za-z' '[\n*]' | sort -u | comm -23 - words > english
+   cat assign2.html | tr '[[:upper:]]' '[[:lower:]]' | tr -cs 'A-Za-z' '[\n*]' | sort -u | comm -23 - hwords > hawaiian
+   cat english | tr -cs "pk\'mnwlhaeiou" '[\n*]' | sort -u | comm -12 - hwords
+   Words "misspelled":
+   e
+   halau
+   hawaiian
+   i
+   kula
+   la
+   lau
+   ma
+   pa
+   po
+   wiki
+Misspelled as Hawaiian but not as English:
+   cat hawaiian | tr -cs 'A-Za-z' '[\n*]' | sort -u | comm -12 - words | less
+   Examples:
+   about
+   all
+   error
+   example
+   many
+   mentioned
+   sort
+   sorted
+   utilities
+   which
+   worry
+   you
+If we take only the "Hawaiian words" from the webpage and check them against English:
+   cat assign2.html | tr '[[:upper:]]' '[[:lower:]]' | tr -cs "pk\'mnwlhaeiou" '[\n*]' | sort -u | comm -23 - hwords | tr -cs 'A-Za-z' '[\n*]' | sort -u | comm -12 - words | less
+   Examples:
+   alen
+   ample
+   mail
+   people
+   plea
+   wha

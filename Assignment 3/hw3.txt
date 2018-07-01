@@ -1,0 +1,7 @@
+Q1) Just looking at the patched code, I think the performance of the patched ls is better because it no longer has to check what ignore_mode before updating ignore_mode. Plus also, the command does not need to print 2 unnecessary directories (. and ..) since the -A command overrides -a now
+
+Q2) -A will now also override the IGNORE_MINIMAL portion of -f, i.e. ls -f and ls-fA have different outputs now
+
+Q3) Running randline.py on an empty file (/dev/null) results in an IndexError: list index out of range. This is because chooseline(self) attempts to pass self.lines (which is empty) into random.choice(), which will try to operate on it
+
+Q4) Running python3 ./randline.py /dev/null gives a SyntaxError at line 65, specifically trying "IOError as (..."

@@ -1,0 +1,63 @@
+1) Download Coreutils 8.29, signature, and GNU keyring from assignment website.
+gpg --verify --keyring ./gnu-keyring.gpg
+Gives the response:
+	gpg: Signature made Wed 27 Dec 2017 10:29:05 AM PST using RSA key ID 306037D9
+	gpg: Good signature from "Padraig Brady <P@draigBrady.com>"
+	gpg:		     aka "Padraig Brady <pbrady@redhat.com>"
+	gpg:		     aka "Padraig Brady <pixelbeat@gnu.org>"
+	gpg: WARNING: This key is not certified with a trusted signature!
+	gpg:	      There is no indication that the signature belongs to the owner.
+	Primary key fingerprint: 6C37 DC12 121A 5006 BC1D  B804 DF6F D971 3060 37D9
+It looks like the signature was verified, but there is uncertainty whether the sigature is tied to the owner
+
+2) tar -xvf coreutils-8.29.tar.xz #extract
+(inside the extracted folder) ./configure --prefix=$HOME/Desktop/CS35L/"Assignment 3/coreutilsInstall" #need the prefix or it will try to configure in the overall branch
+make
+make install #installs the commands in my folder coreutilsInstall
+
+3)
+./coreutilsInstall/bin/ls -a -A still outputs the 2 . and .. directories
+
+4)
+patch -d ./coreutils-8.29 -p1 < lspatch.patch #NEWS failed to patch, but we care about ls.c, local.mk, and a-options.sh
+
+5)
+Run autoreconf -f -i because there is a version mis-match between autoconf when trying to "make" for some reason
+Run make inside of coreutils-8.29, but do NOT install it, or it will override the install we did earlier
+
+6)
+./coreutilsInstall/bin/ls -a -A:
+.
+..
+0001-ls-A-now-overrides-a.patch
+.0001-ls-A-now-overrides-a.patch.swp
+coreutils-8.29
+coreutils-8.29.rej
+coreutils-8.29.tar.xz
+coreutils-8.29.tar.xz.sig
+coreutilsInstall
+gnu-keyring.gpg
+.lab2.log.swp
+lab3.txt
+.lab3.txt.swo
+.lab3.txt.swp
+lspatch.patch
+output.txt
+sigoutput
+
+./corutils-8.29/src/ls -a -A:
+0001-ls-A-now-overrides-a.patch
+.0001-ls-A-now-overrides-a.patch.swp
+coreutils-8.29
+coreutils-8.29.rej
+coreutils-8.29.tar.xz
+coreutils-8.29.tar.xz.sig
+coreutilsInstall
+gnu-keyring.gpg
+.lab2.log.swp
+lab3.txt
+.lab3.txt.swo
+.lab3.txt.swp
+lspatch.patch
+output.txt
+sigoutput

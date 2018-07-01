@@ -1,0 +1,16 @@
+2018-05-04  Chris Lam  <chrisps@lnxsrv06.seas.ucla.edu>
+
+	* coreutils-with-bug/lib/timespec.h (timespec_cmp):
+	Fixed overflow subtraction for really old files when comparing times, so they don't show up as if they were from the future
+
+--- coreutils-with-bug/lib/timespec.h	2018-05-05 01:23:26.255331000 -0700
++++ coreutils-with-bug/lib/timespec.h	2018-05-05 01:25:18.531039000 -0700
+@@ -45,7 +45,7 @@
+ static inline int
+ timespec_cmp (struct timespec a, struct timespec b)
+ {
+-  int diff = a.tv_sec - b.tv_sec;
++  int diff = a.tv_sec > b.tv_sec ? 1 : (a.tv_sec < b.tv_sec ? -1 : 0);
+   return diff ? diff : a.tv_nsec - b.tv_nsec;
+ }
+ 

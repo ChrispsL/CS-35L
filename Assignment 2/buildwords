@@ -1,0 +1,11 @@
+#! /bin/sh
+#Create a script "buildwords":
+       # buildwords -- scrape Hawaiian words from a given webpage
+#Get the table of all the words (between the <tr> and </tr>'s)
+       tr '\n' '|' | grep -o '<tr>.*</tr>' | tr '|' '\n' |
+#Remove the <tr> to </td> tags (i.e. remove all the first words) and leftover </tr> tags:
+       sed '/<tr>/,/<\/td>/d' | sed '/<\/tr>/d' |
+#Clean up formatting (e.g. replacing <u>a</u> and lower-casing):
+      tr '[[:upper:]]' '[[:lower:]]' | sed 's/<u>\([[:lower:]]\)<\/u>/\1/g' | tr '`' "'" | tr -s ', ' ' ' |
+#Get all the words (spell-check/filtered) then sort them:
+    grep -Eo ">[pk'mnwlhaeiou ]+<" | tr -d '><' | tr -s ' ' '\n' | sort -u

@@ -1,0 +1,52 @@
+#!/bin/bash
+
+dots=`ls -A $1 | grep '^\.' | sort`
+files=`ls $1 | sort`
+declare -a ARRFILES
+let numFiles=0
+store=$IFS
+IFS=$'\n' #Internal Field Separator
+
+for iFile in $dots
+do
+    if [ -L "$1/$iFile" ] #ignore symbolic links
+    then :
+    elif [ ! -f "$1/$iFile" ] #ignore non-files (directories)
+    then :
+    elif [ ! -r "$1/$iFile" ]
+    then
+	echo "could not read $iFile">&2
+    else
+	ARRFILES[$numFiles]="$1/$iFile"
+	let numFiles=numFiles+1
+    fi
+done
+
+for iFile in $files
+do
+    if [ -L "$1/$iFile" ]
+    then :
+    elif [ ! -f "$1/$iFile" ]
+    then :
+    elif [ ! -r "$1/$iFile" ]
+    then
+	 echo "could not read $iFile">&2
+    else
+	ARRFILES[$numFiles]="$1/$iFile"
+	let numFiles=numFiles+1
+    fi
+done
+
+for((i=0;i<$numFiles;i++))
+do
+    for((j=i+1;j<$numFiles;j++))
+    do
+	if cmp -s -- "${ARRFILES[$i]}" "${ARRFILES[$j]}"
+	then
+	    ln -Pf -- "${ARRFILES[$i]}" "${ARRFILES[$j]}"
+	    ARRFILES[$j]=ARRFILES[$i]
+	fi
+    done
+done
+
+IFS=$store

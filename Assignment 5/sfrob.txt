@@ -1,0 +1,4 @@
+First made a random text file
+head -c 5M < /dev/urandom > randfile.txt (~5242880)
+
+

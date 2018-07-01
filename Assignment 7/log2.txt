@@ -1,0 +1,114 @@
+
+Vincent Chi
+304576879
+Assignment 7 lab
+partner: chris lam
+
+1. Beaglebone setup:
+First I had to set up the beagle bone. Following the instructions, I first connected the beagle bone to
+my computer using the usb cable provided, and then downloaded all necessary drivers.
+
+To ssh into the board, run:
+sudo ssh root@192.168.7.2
+type enter, default password is nothing.
+
+Start to connect to wifi by using:
+sudo connmanctl
+once in the connmanctl propter, enter
+>enable wifi
+>scan wifi
+>services
+
+and then register client:
+
+>agent on
+
+Then, selecting the wifi to connect to , 
+> connect wifi_506583d4fc5e_544e434150413937414239_managed_psk
+Passphrase? 3760ClassNet
+>quit
+
+Now we are connected, and to check the ip address of the beagle bone, run 
+ifconfig
+
+For chris, his is 172.29.83.120
+
+2. Account setup:
+Now, as the server, I add an account for chris in the beagle bone using:
+
+user add chris
+passwd chris
+to make it easy to remember, I simply made his password “chris” as well
+
+Then, to make his home directory, I used:
+
+mkdir /home/chris
+
+to give him ownership, use:
+chown chris /home/chris
+
+
+3. Logging in:
+On his side, to log in to the account, need to use:
+
+ssh chris@172.29.83.123
+
+to login to the account on his board, use:
+
+ssh vincent@172.29.83.120
+And then type in the password vincent
+
+Pwd returns /home/vincent, so we are now logged into the account created 
+on my beagle bone.
+
+
+4. Ssh agent
+To prevent having to type in password each time to log in, we set up
+key based login.
+
+Start by generating a key on the client side using:
+
+ssh keygen, saving the key to key1.txt
+then, we add the key.
+
+ssh-copy-id -i key1.txt.pub vincent@172.29.83.120
+
+ssh-add key1.txt
+
+Now, simply typing in
+ssh vincent@172.29.83.120 logs us in w/o the need of a password
+
+
+5. Test:
+To test if xterm, gedit, and firefox work, first we must install them. On my 
+new beagle bone, they are not installed, so to do so use:
+
+sudo apt-get install firefox-esr-l10n-en-gb
+sudo apt-get install gedit
+sudo apt-get install xterm
+
+Next, we must ensure that x11 forwarding is enabled.
+To do so, we need to check the ssh_config and sshd_config files using:
+
+cd /etc
+cd ssh
+
+Locate the ssh_config and sshd_config files, edit using vim changing in both:
+X11Forwarding no —> X11Forwarding yes
+
+After installing and chasing the config files, log back out and lock back in
+using C-d, then ssh -X vincent@172.29.83.120 again
+
+now, the commands:
+
+xterm
+gedit
+firefox 
+
+all work, which opens up an Xquartz window on my computer and displays
+the UI for them. It is noticeable that firefox runs extremely slowly. Like
+windows xp running internet explore from a 2004 desktop from walmart slow.
+
+
+
+

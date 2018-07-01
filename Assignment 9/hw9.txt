@@ -1,0 +1,111 @@
+1) Commit my changes and checkout a new branch
+git checkout v3.0 -b quote
+
+2) Apply my patch
+patch -p1 < quote-3.0-patch.txt
+Output:
+patching file src/cmp.c
+patching file src/diff.c
+patching file src/diff3.c
+patching file src/dir.c
+patching file src/sdiff.c
+patching file src/util.c
+
+3) Go into emacs and use the add-change-log-entry-other-window (C-x 4 a) command
+Add my 6 modifications to the log
+	* src/cmp.c:    Replaced all graves (`) with single quotes (')
+        * src/diff.c:   Replaces all graves (`) with single quotes (')
+        * src/diff3.c:  Replaces all graves (`) with single quotes (')
+        * src/dir.c:    Replaces all graves (`) with single quotes (')
+        * src/sdiff.c:  Replaces all graves (`) with single quotes (')
+        * src/util.c:   Replaces all graves (`) with single quotes (')
+
+
+4) Commit changes to new branch, using the ChangeLog entry just made as the message
+git add .
+git commit -F ChangeLog
+
+git log
+Output:
+[quote a7c9b5d] 2018-06-08  Christopher Wai Lam  <lamc@lnxsrv06.seas.ucla.edu>
+ Committer: Christopher Wai Lam <lamc@lnxsrv06.seas.ucla.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 11 files changed, 719 insertions(+), 45 deletions(-)
+ create mode 100644 .nfs00000000003f2b7b00000350
+ create mode 100644 .nfs00000000003f2b7d00000351
+ create mode 100644 .nfs00000000003f2b7e00000352
+ create mode 100644 quote-3.0-patch.txt
+ create mode 100644 src/.nfs00000000008b36a500000353
+
+5) Generate formatted-patch.txt and exchange with partner
+git format-patch -1 --stdout > formatted-patch.txt
+
+6) Checkout a new temporary branch to test applying our patches
+git checkout v3.0 -b partner
+
+I used WinSCP to handle file transferring
+
+git am < formatted-patch.txt (this is Vincent's file)
+git am --abort (there was an error about mbox)
+rerun git am < formatted-patch.txt
+
+Output:
+Applying: 2018-06-08 Vincent M Chi <classvch@lnxsrv09.seas.ucla.edu>
+.git/rebase-apply/patch:38: trailing whitespace.
+
+.git/rebase-apply/patch:52: trailing whitespace.
+
+.git/rebase-apply/patch:94: trailing whitespace.
+
+.git/rebase-apply/patch:96: trailing whitespace.
+
+.git/rebase-apply/patch:105: trailing whitespace.
+
+warning: squelched 501 whitespace errors
+warning: 506 lines add whitespace errors.
+
+Rebuild:
+./bootstrap
+patch -p0 < diffutils-gets.diff (or else I get a gets error when making)
+./configure
+make
+make check
+
+make check outputs 3 errors at the end (although everything seems to be working fine):
+/bin/sh: /bin/sh: cannot execute binary file
+make[3]: *** [Makefile:1309: basic.log] Error 126
+make[3]: Leaving directory '/w/home.17/cs/ugrad/lamc/Desktop/CS35L/Assignment9/diffutils/tests'
+make[2]: *** [Makefile:1291: check-TESTS] Error 2
+make[2]: Leaving directory '/w/home.17/cs/ugrad/lamc/Desktop/CS35L/Assignment9/diffutils/tests'
+make[1]: *** [Makefile:1406: check-am] Error 2
+make[1]: Leaving directory '/w/home.17/cs/ugrad/lamc/Desktop/CS35L/Assignment9/diffutils/tests'
+make: *** [Makefile:1017: check-recursive] Error 1
+
+
+Testing "./src/diff . -" and "./src/diff --help" outputs the correct single quotes
+
+7) Run make distdir
+Checking the changelog file (using emacs diffutils*/ChangLog), I see my message at the top
+
+8) cd to ~eggert/src/gnu/emacs and run gitk, I get this error:
+Application initialization failed: no display name and no $DISPLAY environment variable
+Error in startup script: no display name and no $DISPLAY environment variable
+    while executing
+"load /usr/lib64/tk8.5/../libtk8.5.so Tk"
+    ("package ifneeded Tk 8.5.13" script)
+    invoked from within
+"package require Tk"
+    (file "/usr/local/cs/bin/gitk" line 10)
+
+I enabled X11 forwarding. So instead, I cloned ~eggert/src/gnu/emacs and ran gitk

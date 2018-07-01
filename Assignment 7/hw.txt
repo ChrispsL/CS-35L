@@ -1,0 +1,13 @@
+1) Yes, our network is secure because of asymmetric encryption.
+Any messages encrypted with my public key can only be decrypted with my private key, which is on my computer locally, and vice versa:
+I encrypt messages with the other's public key, and only they can decrypt it.
+
+(1) Our network would still be secure because the client-server setup is already done, so we won't be typing our passphrases.
+Had the team been keylogging us while we set up the keys and authentication and everything, the team could decipher the bytes.
+
+(2) The network would be compromised if the other teams had physical control of the USB that I booted off of, because they could access the .ssh folders containing all the keys.
+
+
+2) The verify command only checks whether the file and the detached signature (decrypted with the public key sent) matches. This can be easily intercepted and encrypted by a different person.
+
+Making my signature securely public (e.g. upload to pgp.mit.edu) can ensure that if the decrypted signature and data using my public key does not match, someone else has done something to it.

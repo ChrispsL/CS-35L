@@ -1,0 +1,78 @@
+To flash the beaglebone board, since I bought it from a previous owner, I downloaded "bone-debian-9.3-iot-armhf-2018-03-05-4gb" image from the BeagleBoard site.
+I wrote it to a microSD using Win32DiskImager. Then I put it in the board and held the USER button while plugging it into my computer.
+SSH-ing into 192.168.7.2, I edited /boot/uEnv.txt to activate eMMC flashing (by uncommenting the last line).
+Rebooting it with the microSD card still in, I let it flash completely.
+
+Logging in as debian (password: temppwd), I followed these steps from Piazza:
+After you successfully SSH into your BeagleBone, you should connect it to wifi. The tool we use for wifi connection management is "connmanctl". The steps to connect to wifi:
+Start the connmanctl terminal:
+sudo connmanctl
+Turn on the wifi for your BeagleBone:
+connmanctl> enable wifi
+Scan all available wifi access points:
+connmanctl> scan wifi
+List all the discovered access points:
+connmanctl> services
+The access point you will connect to will look something like this:
+CR3760-wifi wifi_506583d4fc5e_544e434150413937414239_managed_psk
+Register as the prospective client:
+connmanctl> agent on
+After you locate the access point you want to connect to, use the string next to the name of the access point as the input to the following command:
+connmanctl> connect wifi_506583d4fc5e_544e434150413937414239_managed_psk
+If the access point requires a wifi password, enter the password after "Passphrase?":
+Passphrase? 3760ClassNet
+Now you are connected to the wifi so close the application connmanctl:
+connmanctl> quit
+
+"ifconfig" > "wlan0" > "inet" my board's IP address is 172.29.83.120
+
+Update and install gedit, xauth, and xvfb, and openssh:
+sudo apt-get update
+sudo apt-get install xauth
+sudo apt-get install xvfb
+sudo apt-get install gedit
+sudo apt-get install openssh-server
+
+Install Firefox and check for enabling X11 (from Piazza):
+sudo apt-get install firefox-esr-l10n-en-gb
+Some BeagleBones come with X11 disabled as a factory setting.
+Therefore, make sure that it is enabled before attempting the X11 forwarding part of the assignment.
+On both the server and client, check /etc/ssh/ssh_config and /etc/ssh/sshd_config files. Both can possibly disable X11 forwarding.
+Check for the line 'X11Forwarding no' and change it to 'X11Forwarding yes’.
+Additionally, make sure that ~/.ssh/config contains 'ForwardAgent yes' and 'ForwardX11 yes' for the relevant hosts.
+
+Make RSA keys for SSH (no passphrase):
+ssh-keygen
+SHA256:4YwaIvoV5kqrg3dzJx3i4HGmwerAVCVWYAKk+OqX/C4 debian@beaglebone
+The key's randomart image is:
++---[RSA 2048]----+
+|+o =oo           |
+|o + o            |
+|o  .    .        |
+| ..    + .       |
+|..o.+ . S        |
+|+o +=++ .        |
+|=.oo=O o .       |
+|++oE= + o        |
+|.**.+= o         |
++----[SHA256]-----+
+
+Make folder for Vincent to access and use (vincent did the same on his with my name):
+sudo useradd -d /home/vincent -m vincent
+sudo passwd vincent (I made password "vincent")
+sudo mkdir /home/vincent/.ssh
+sudo chown -R vincent /home/vincent/.ssh
+sudo chmod 700 /home/vincent/.ssh
+
+My IP address, found using ifconfig, is 172.29.83.120
+Vincent's is 172.29.83.123
+
+To copy my public key to Vincent:
+ssh-copy-id -i chris@172.29.83.123
+ssh-add (adds password for passphrase-less login)
+
+Now to access Vincent's host and test if I can open up xterm:
+ssh -Y chris@172.29.83.123 (needed to ssh into my own beaglebone with -Y too)
+xterm (xterm shell window opens)
+gedit
+firefox

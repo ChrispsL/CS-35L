@@ -1,0 +1,35 @@
+1) Write script to generate data
+od -N 40000000 -t fF < /dev/urandom |
+sed 's/^[^ ]*//g' |
+sed 's/^[^0-9\-e\+]*//g' | 
+tr -s ' ' '\n'
+
+2) Time sort
+time -p sort -g testData.txt > /dev/null
+real 19.80
+user 109.16
+sys 0.49
+
+time -p sort -g --parallel 1 testData.txt > /dev/null
+real 103.14
+user 102.90
+sys 0.23
+
+time -p sort -g --parallel 2 testData.txt > /dev/null
+real 54.73
+user 104.14
+sys 0.30
+
+time -p sort -g --parallel 4 testData.txt > /dev/null
+real 31.94
+user 108.33
+sys 0.36
+
+time -p sort -g --parallel 8 testData/txt > /dev/null
+real 23.13
+user 126.37
+sys 0.43
+
+Since the default parallel option is number of available cores (max 8), the default sort was pretty quick. Starting from 1, 2, 4, and 8 threads however, the speedup is very visible.
+User time goes up because of overhead (and it looks like it's the sum of all the cores' work), but the real time it takes for all the threads to do the work is much quicker, 
+though it's not exactly halved each time the threads are increased

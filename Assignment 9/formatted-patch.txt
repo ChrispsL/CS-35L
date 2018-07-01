@@ -1,0 +1,1137 @@
+From a7c9b5d59da8fb1e4f6b2a335a29b7be6a4d06a1 Mon Sep 17 00:00:00 2001
+From: Christopher Wai Lam <lamc@lnxsrv06.seas.ucla.edu>
+Date: Fri, 8 Jun 2018 17:55:05 -0700
+Subject: [PATCH] 2018-06-08  Christopher Wai Lam 
+ <lamc@lnxsrv06.seas.ucla.edu>
+
+	* src/cmp.c:	Replaced all graves (`) with single quotes (')
+	* src/diff.c: 	Replaces all graves (`) with single quotes (')
+	* src/diff3.c:	Replaces all graves (`) with single quotes (')
+	* src/dir.c:	Replaces all graves (`) with single quotes (')
+	* src/sdiff.c:	Replaces all graves (`) with single quotes (')
+	* src/util.c:	Replaces all graves (`) with single quotes (')
+---
+ .nfs00000000003f2b7b00000350     | Bin 0 -> 4096 bytes
+ .nfs00000000003f2b7d00000351     | Bin 0 -> 16384 bytes
+ .nfs00000000003f2b7e00000352     | 337 +++++++++++++++++++++++++++++++++++++++
+ quote-3.0-patch.txt              | 337 +++++++++++++++++++++++++++++++++++++++
+ src/.nfs00000000008b36a500000353 |   0
+ src/cmp.c                        |  16 +-
+ src/diff.c                       |  28 ++--
+ src/diff3.c                      |  20 +--
+ src/dir.c                        |   2 +-
+ src/sdiff.c                      |  16 +-
+ src/util.c                       |   8 +-
+ 11 files changed, 719 insertions(+), 45 deletions(-)
+ create mode 100644 .nfs00000000003f2b7b00000350
+ create mode 100644 .nfs00000000003f2b7d00000351
+ create mode 100644 .nfs00000000003f2b7e00000352
+ create mode 100644 quote-3.0-patch.txt
+ create mode 100644 src/.nfs00000000008b36a500000353
+
+diff --git a/.nfs00000000003f2b7b00000350 b/.nfs00000000003f2b7b00000350
+new file mode 100644
+index 0000000000000000000000000000000000000000..f47f3bf7cbcb309cb231ec8f21ad046390c44f02
+GIT binary patch
+literal 4096
+zcmYc?2=nw+FxN9-00IF9hVAmw(N)^^3=eY{7;+MGlR?6SKu%soaZ#CpnO<>fVzFLn
+za!#UNYDy`lt~!u``Yx%(*(Lb}`p&_|rat<P#l@NFdAX^1C6@XrnQ3XIC7C(J`h}(W
+zC8@f`dIq{Bsl_FFB^4!@rj3e>hQMeDkQM^G48}%=1|U7kN{R}?LZPH-A5}dX0;3@?
+b8UmvsFd71*Aut*OqaiRF0;3@?q(cAzBPAye
+
+literal 0
+HcmV?d00001
+
+diff --git a/.nfs00000000003f2b7d00000351 b/.nfs00000000003f2b7d00000351
+new file mode 100644
+index 0000000000000000000000000000000000000000..6251c6f52cedc98029a070a6b0473b21fd3d3e7e
+GIT binary patch
+literal 16384
+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
+B{%8OI
+
+literal 0
+HcmV?d00001
+
+diff --git a/.nfs00000000003f2b7e00000352 b/.nfs00000000003f2b7e00000352
+new file mode 100644
+index 0000000..07aa434
+--- /dev/null
++++ b/.nfs00000000003f2b7e00000352
+@@ -0,0 +1,337 @@
++diff --git a/src/cmp.c b/src/cmp.c
++index 2455dc4..ebf1688 100644
++--- a/src/cmp.c
+++++ b/src/cmp.c
++@@ -115,7 +115,7 @@ try_help (char const *reason_msgid, char const *operand)
++   if (reason_msgid)
++     error (0, 0, _(reason_msgid), operand);
++   error (EXIT_TROUBLE, 0,
++-	 _("Try `%s --help' for more information."), program_name);
+++	 _("Try '%s --help' for more information."), program_name);
++   abort ();
++ }
++ 
++@@ -134,7 +134,7 @@ specify_ignore_initial (int f, char **argptr, char delimiter)
++   if (! (e == LONGINT_OK
++ 	 || (e == LONGINT_INVALID_SUFFIX_CHAR && **argptr == delimiter))
++       || TYPE_MAXIMUM (off_t) < val)
++-    try_help ("invalid --ignore-initial value `%s'", arg);
+++    try_help ("invalid --ignore-initial value '%s'", arg);
++   if (ignore_initial[f] < val)
++     ignore_initial[f] = val;
++ }
++@@ -185,7 +185,7 @@ usage (void)
++ 	  _("SKIP values may be followed by the following multiplicative suffixes:\n\
++ kB 1000, K 1024, MB 1,000,000, M 1,048,576,\n\
++ GB 1,000,000,000, G 1,073,741,824, and so on for T, P, E, Z, Y."),
++-	  _("If a FILE is `-' or missing, read standard input."),
+++	  _("If a FILE is '-' or missing, read standard input."),
++ 	  _("Exit status is 0 if inputs are the same, 1 if different, 2 if trouble."));
++   emit_bug_reporting_address ();
++ }
++@@ -231,7 +231,7 @@ main (int argc, char **argv)
++ 	{
++ 	  uintmax_t n;
++ 	  if (xstrtoumax (optarg, 0, 0, &n, valid_suffixes) != LONGINT_OK)
++-	    try_help ("invalid --bytes value `%s'", optarg);
+++	    try_help ("invalid --bytes value '%s'", optarg);
++ 	  if (n < bytes)
++ 	    bytes = n;
++ 	}
++@@ -257,7 +257,7 @@ main (int argc, char **argv)
++       }
++ 
++   if (optind == argc)
++-    try_help ("missing operand after `%s'", argv[argc - 1]);
+++    try_help ("missing operand after '%s'", argv[argc - 1]);
++ 
++   file[0] = argv[optind++];
++   file[1] = optind < argc ? argv[optind++] : "-";
++@@ -269,7 +269,7 @@ main (int argc, char **argv)
++     }
++ 
++   if (optind < argc)
++-    try_help ("extra operand `%s'", argv[optind]);
+++    try_help ("extra operand '%s'", argv[optind]);
++ 
++   for (f = 0; f < 2; f++)
++     {
++@@ -364,8 +364,8 @@ main (int argc, char **argv)
++   return exit_status;
++ }
++ 
++-/* Compare the two files already open on `file_desc[0]' and `file_desc[1]',
++-   using `buffer[0]' and `buffer[1]'.
+++/* Compare the two files already open on 'file_desc[0]' and 'file_desc[1]',
+++   using 'buffer[0]' and 'buffer[1]'.
++    Return EXIT_SUCCESS if identical, EXIT_FAILURE if different,
++    >1 if error.  */
++ 
++diff --git a/src/diff.c b/src/diff.c
++index cc1b611..256a984 100644
++--- a/src/diff.c
+++++ b/src/diff.c
++@@ -330,7 +330,7 @@ main (int argc, char **argv)
++ 	      {
++ 		numval = strtoumax (optarg, &numend, 10);
++ 		if (*numend)
++-		  try_help ("invalid context length `%s'", optarg);
+++		  try_help ("invalid context length '%s'", optarg);
++ 		if (LIN_MAX < numval)
++ 		  numval = LIN_MAX;
++ 	      }
++@@ -505,7 +505,7 @@ main (int argc, char **argv)
++ 	case 'W':
++ 	  numval = strtoumax (optarg, &numend, 10);
++ 	  if (! (0 < numval && numval <= SIZE_MAX) || *numend)
++-	    try_help ("invalid width `%s'", optarg);
+++	    try_help ("invalid width '%s'", optarg);
++ 	  if (width != numval)
++ 	    {
++ 	      if (width)
++@@ -534,7 +534,7 @@ main (int argc, char **argv)
++ 	case HORIZON_LINES_OPTION:
++ 	  numval = strtoumax (optarg, &numend, 10);
++ 	  if (*numend)
++-	    try_help ("invalid horizon length `%s'", optarg);
+++	    try_help ("invalid horizon length '%s'", optarg);
++ 	  horizon_lines = MAX (horizon_lines, MIN (numval, LIN_MAX));
++ 	  break;
++ 
++@@ -585,7 +585,7 @@ main (int argc, char **argv)
++ 	case TABSIZE_OPTION:
++ 	  numval = strtoumax (optarg, &numend, 10);
++ 	  if (! (0 < numval && numval <= SIZE_MAX) || *numend)
++-	    try_help ("invalid tabsize `%s'", optarg);
+++	    try_help ("invalid tabsize '%s'", optarg);
++ 	  if (tabsize != numval)
++ 	    {
++ 	      if (tabsize)
++@@ -744,9 +744,9 @@ main (int argc, char **argv)
++ 	  if (argc - optind != 2)
++ 	    {
++ 	      if (argc - optind < 2)
++-		try_help ("missing operand after `%s'", argv[argc - 1]);
+++		try_help ("missing operand after '%s'", argv[argc - 1]);
++ 	      else
++-		try_help ("extra operand `%s'", argv[optind + 2]);
+++		try_help ("extra operand '%s'", argv[optind + 2]);
++ 	    }
++ 
++ 	  exit_status = compare_files (NULL, argv[optind], argv[optind + 1]);
++@@ -826,7 +826,7 @@ try_help (char const *reason_msgid, char const *operand)
++ {
++   if (reason_msgid)
++     error (0, 0, _(reason_msgid), operand);
++-  error (EXIT_TROUBLE, 0, _("Try `%s --help' for more information."),
+++  error (EXIT_TROUBLE, 0, _("Try '%s --help' for more information."),
++ 	 program_name);
++   abort ();
++ }
++@@ -870,11 +870,11 @@ static char const * const option_help_msgid[] = {
++   -W NUM  --width=NUM  Output at most NUM (default 130) print columns.\n\
++   --left-column  Output only the left column of common lines.\n\
++   --suppress-common-lines  Do not output common lines."),
++-  N_("-D NAME  --ifdef=NAME  Output merged file to show `#ifdef NAME' diffs."),
+++  N_("-D NAME  --ifdef=NAME  Output merged file to show '#ifdef NAME' diffs."),
++   N_("--GTYPE-group-format=GFMT  Similar, but format GTYPE input groups with GFMT."),
++   N_("--line-format=LFMT  Similar, but format all input lines with LFMT."),
++   N_("--LTYPE-line-format=LFMT  Similar, but format LTYPE input lines with LFMT."),
++-  N_("  LTYPE is `old', `new', or `unchanged'.  GTYPE is LTYPE or `changed'."),
+++  N_("  LTYPE is 'old', 'new', or 'unchanged'.  GTYPE is LTYPE or 'changed'."),
++   N_("  GFMT may contain:\n\
++     %<  lines from FILE1\n\
++     %>  lines from FILE2\n\
++@@ -895,7 +895,7 @@ static char const * const option_help_msgid[] = {
++     %c'C'  the single character C\n\
++     %c'\\OOO'  the character with octal code OOO"),
++   "",
++-  N_("-l  --paginate  Pass the output through `pr' to paginate it."),
+++  N_("-l  --paginate  Pass the output through 'pr' to paginate it."),
++   N_("-t  --expand-tabs  Expand tabs to spaces in output."),
++   N_("-T  --initial-tab  Make tabs line up by prepending a tab."),
++   N_("--tabsize=NUM  Tab stops are every NUM (default 8) print columns."),
++@@ -918,9 +918,9 @@ static char const * const option_help_msgid[] = {
++   N_("-v  --version  Output version info."),
++   N_("--help  Output this help."),
++   "",
++-  N_("FILES are `FILE1 FILE2' or `DIR1 DIR2' or `DIR FILE...' or `FILE... DIR'."),
+++  N_("FILES are 'FILE1 FILE2' or 'DIR1 DIR2' or 'DIR FILE...' or 'FILE... DIR'."),
++   N_("If --from-file or --to-file is given, there are no restrictions on FILES."),
++-  N_("If a FILE is `-', read standard input."),
+++  N_("If a FILE is '-', read standard input."),
++   N_("Exit status is 0 if inputs are the same, 1 if different, 2 if trouble."),
++   0
++ };
++@@ -960,7 +960,7 @@ specify_value (char const **var, char const *value, char const *option)
++ {
++   if (*var && strcmp (*var, value) != 0)
++     {
++-      error (0, 0, _("conflicting %s option value `%s'"), option, value);
+++      error (0, 0, _("conflicting %s option value '%s'"), option, value);
++       try_help (NULL, NULL);
++     }
++   *var = value;
++@@ -1159,7 +1159,7 @@ compare_files (struct comparison const *parent,
++ 	= dir_file_pathname (dir, last_component (fnm));
++ 
++       if (STREQ (fnm, "-"))
++-	fatal ("cannot compare `-' to a directory");
+++	fatal ("cannot compare '-' to a directory");
++ 
++       if (stat (filename, &cmp.file[dir_arg].stat) != 0)
++ 	{
++diff --git a/src/diff3.c b/src/diff3.c
++index 0f11fdc..fbfb28b 100644
++--- a/src/diff3.c
+++++ b/src/diff3.c
++@@ -316,9 +316,9 @@ main (int argc, char **argv)
++   if (argc - optind != 3)
++     {
++       if (argc - optind < 3)
++-	try_help ("missing operand after `%s'", argv[argc - 1]);
+++	try_help ("missing operand after '%s'", argv[argc - 1]);
++       else
++-	try_help ("extra operand `%s'", argv[optind + 3]);
+++	try_help ("extra operand '%s'", argv[optind + 3]);
++     }
++ 
++   file = &argv[optind];
++@@ -351,7 +351,7 @@ main (int argc, char **argv)
++ 	 file instead.  */
++       common = 3 - common;
++       if (STREQ (file[0], "-") || STREQ (file[common], "-"))
++-	fatal ("`-' specified for more than one input file");
+++	fatal ("'-' specified for more than one input file");
++     }
++ 
++   mapping[0] = 0;
++@@ -412,7 +412,7 @@ try_help (char const *reason_msgid, char const *operand)
++   if (reason_msgid)
++     error (0, 0, _(reason_msgid), operand);
++   error (EXIT_TROUBLE, 0,
++-	 _("Try `%s --help' for more information."), program_name);
+++	 _("Try '%s --help' for more information."), program_name);
++   abort ();
++ }
++ 
++@@ -435,7 +435,7 @@ static char const * const option_help_msgid[] = {
++   "",
++   N_("-m  --merge  Output merged file instead of ed script (default -A)."),
++   N_("-L LABEL  --label=LABEL  Use LABEL instead of file name."),
++-  N_("-i  Append `w' and `q' commands to ed scripts."),
+++  N_("-i  Append 'w' and 'q' commands to ed scripts."),
++   N_("-a  --text  Treat all files as text."),
++   N_("--strip-trailing-cr  Strip trailing carriage return on input."),
++   N_("-T  --initial-tab  Make tabs line up by prepending a tab."),
++@@ -460,7 +460,7 @@ usage (void)
++     else
++       putchar ('\n');
++   printf ("\n%s\n%s\n",
++-	  _("If a FILE is `-', read standard input."),
+++	  _("If a FILE is '-', read standard input."),
++ 	  _("Exit status is 0 if successful, 1 if conflicts, 2 if trouble."));
++   emit_bug_reporting_address ();
++ }
++@@ -1275,12 +1275,12 @@ read_diff (char const *filea,
++   if (EXIT_TROUBLE <= status)
++     error (EXIT_TROUBLE, werrno,
++ 	   _(status == 126
++-	     ? "subsidiary program `%s' could not be invoked"
+++	     ? "subsidiary program '%s' could not be invoked"
++ 	     : status == 127
++-	     ? "subsidiary program `%s' not found"
+++	     ? "subsidiary program '%s' not found"
++ 	     : status == INT_MAX
++-	     ? "subsidiary program `%s' failed"
++-	     : "subsidiary program `%s' failed (exit status %d)"),
+++	     ? "subsidiary program '%s' failed"
+++	     : "subsidiary program '%s' failed (exit status %d)"),
++ 	   diff_program, status);
++ 
++   return diff_result + total;
++diff --git a/src/dir.c b/src/dir.c
++index 5b4eaec..5e08318 100644
++--- a/src/dir.c
+++++ b/src/dir.c
++@@ -154,7 +154,7 @@ compare_names (char const *name1, char const *name2)
++ 	r = strcoll (name1, name2);
++       if (errno)
++ 	{
++-	  error (0, errno, _("cannot compare file names `%s' and `%s'"),
+++	  error (0, errno, _("cannot compare file names '%s' and '%s'"),
++ 		 name1, name2);
++ 	  longjmp (failed_locale_specific_sorting, 1);
++ 	}
++diff --git a/src/sdiff.c b/src/sdiff.c
++index 4344e8d..5bbecd8 100644
++--- a/src/sdiff.c
+++++ b/src/sdiff.c
++@@ -175,7 +175,7 @@ try_help (char const *reason_msgid, char const *operand)
++ {
++   if (reason_msgid)
++     error (0, 0, _(reason_msgid), operand);
++-  error (EXIT_TROUBLE, 0, _("Try `%s --help' for more information."),
+++  error (EXIT_TROUBLE, 0, _("Try '%s --help' for more information."),
++ 	 program_name);
++   abort ();
++ }
++@@ -230,7 +230,7 @@ usage (void)
++     else
++       putchar ('\n');
++   printf ("\n%s\n%s\n",
++-	  _("If a FILE is `-', read standard input."),
+++	  _("If a FILE is '-', read standard input."),
++ 	  _("Exit status is 0 if inputs are the same, 1 if different, 2 if trouble."));
++   emit_bug_reporting_address ();
++ }
++@@ -286,12 +286,12 @@ check_child_status (int werrno, int wstatus, int max_ok_status,
++     {
++       error (0, werrno,
++ 	     _(status == 126
++-	       ? "subsidiary program `%s' could not be invoked"
+++	       ? "subsidiary program '%s' could not be invoked"
++ 	       : status == 127
++-	       ? "subsidiary program `%s' not found"
+++	       ? "subsidiary program '%s' not found"
++ 	       : status == INT_MAX
++-	       ? "subsidiary program `%s' failed"
++-	       : "subsidiary program `%s' failed (exit status %d)"),
+++	       ? "subsidiary program '%s' failed"
+++	       : "subsidiary program '%s' failed (exit status %d)"),
++ 	     subsidiary_program, status);
++       exiterr ();
++     }
++@@ -572,9 +572,9 @@ main (int argc, char *argv[])
++   if (argc - optind != 2)
++     {
++       if (argc - optind < 2)
++-	try_help ("missing operand after `%s'", argv[argc - 1]);
+++	try_help ("missing operand after '%s'", argv[argc - 1]);
++       else
++-	try_help ("extra operand `%s'", argv[optind + 2]);
+++	try_help ("extra operand '%s'", argv[optind + 2]);
++     }
++ 
++   if (! output)
++diff --git a/src/util.c b/src/util.c
++index 3be03e9..d18bf38 100644
++--- a/src/util.c
+++++ b/src/util.c
++@@ -298,12 +298,12 @@ finish_output (void)
++       if (status)
++ 	error (EXIT_TROUBLE, werrno,
++ 	       _(status == 126
++-		 ? "subsidiary program `%s' could not be invoked"
+++		 ? "subsidiary program '%s' could not be invoked"
++ 		 : status == 127
++-		 ? "subsidiary program `%s' not found"
+++		 ? "subsidiary program '%s' not found"
++ 		 : status == INT_MAX
++-		 ? "subsidiary program `%s' failed"
++-		 : "subsidiary program `%s' failed (exit status %d)"),
+++		 ? "subsidiary program '%s' failed"
+++		 : "subsidiary program '%s' failed (exit status %d)"),
++ 	       pr_program, status);
++     }
++ 
+diff --git a/quote-3.0-patch.txt b/quote-3.0-patch.txt
+new file mode 100644
+index 0000000..07aa434
+--- /dev/null
++++ b/quote-3.0-patch.txt
+@@ -0,0 +1,337 @@
++diff --git a/src/cmp.c b/src/cmp.c
++index 2455dc4..ebf1688 100644
++--- a/src/cmp.c
+++++ b/src/cmp.c
++@@ -115,7 +115,7 @@ try_help (char const *reason_msgid, char const *operand)
++   if (reason_msgid)
++     error (0, 0, _(reason_msgid), operand);
++   error (EXIT_TROUBLE, 0,
++-	 _("Try `%s --help' for more information."), program_name);
+++	 _("Try '%s --help' for more information."), program_name);
++   abort ();
++ }
++ 
++@@ -134,7 +134,7 @@ specify_ignore_initial (int f, char **argptr, char delimiter)
++   if (! (e == LONGINT_OK
++ 	 || (e == LONGINT_INVALID_SUFFIX_CHAR && **argptr == delimiter))
++       || TYPE_MAXIMUM (off_t) < val)
++-    try_help ("invalid --ignore-initial value `%s'", arg);
+++    try_help ("invalid --ignore-initial value '%s'", arg);
++   if (ignore_initial[f] < val)
++     ignore_initial[f] = val;
++ }
++@@ -185,7 +185,7 @@ usage (void)
++ 	  _("SKIP values may be followed by the following multiplicative suffixes:\n\
++ kB 1000, K 1024, MB 1,000,000, M 1,048,576,\n\
++ GB 1,000,000,000, G 1,073,741,824, and so on for T, P, E, Z, Y."),
++-	  _("If a FILE is `-' or missing, read standard input."),
+++	  _("If a FILE is '-' or missing, read standard input."),
++ 	  _("Exit status is 0 if inputs are the same, 1 if different, 2 if trouble."));
++   emit_bug_reporting_address ();
++ }
++@@ -231,7 +231,7 @@ main (int argc, char **argv)
++ 	{
++ 	  uintmax_t n;
++ 	  if (xstrtoumax (optarg, 0, 0, &n, valid_suffixes) != LONGINT_OK)
++-	    try_help ("invalid --bytes value `%s'", optarg);
+++	    try_help ("invalid --bytes value '%s'", optarg);
++ 	  if (n < bytes)
++ 	    bytes = n;
++ 	}
++@@ -257,7 +257,7 @@ main (int argc, char **argv)
++       }
++ 
++   if (optind == argc)
++-    try_help ("missing operand after `%s'", argv[argc - 1]);
+++    try_help ("missing operand after '%s'", argv[argc - 1]);
++ 
++   file[0] = argv[optind++];
++   file[1] = optind < argc ? argv[optind++] : "-";
++@@ -269,7 +269,7 @@ main (int argc, char **argv)
++     }
++ 
++   if (optind < argc)
++-    try_help ("extra operand `%s'", argv[optind]);
+++    try_help ("extra operand '%s'", argv[optind]);
++ 
++   for (f = 0; f < 2; f++)
++     {
++@@ -364,8 +364,8 @@ main (int argc, char **argv)
++   return exit_status;
++ }
++ 
++-/* Compare the two files already open on `file_desc[0]' and `file_desc[1]',
++-   using `buffer[0]' and `buffer[1]'.
+++/* Compare the two files already open on 'file_desc[0]' and 'file_desc[1]',
+++   using 'buffer[0]' and 'buffer[1]'.
++    Return EXIT_SUCCESS if identical, EXIT_FAILURE if different,
++    >1 if error.  */
++ 
++diff --git a/src/diff.c b/src/diff.c
++index cc1b611..256a984 100644
++--- a/src/diff.c
+++++ b/src/diff.c
++@@ -330,7 +330,7 @@ main (int argc, char **argv)
++ 	      {
++ 		numval = strtoumax (optarg, &numend, 10);
++ 		if (*numend)
++-		  try_help ("invalid context length `%s'", optarg);
+++		  try_help ("invalid context length '%s'", optarg);
++ 		if (LIN_MAX < numval)
++ 		  numval = LIN_MAX;
++ 	      }
++@@ -505,7 +505,7 @@ main (int argc, char **argv)
++ 	case 'W':
++ 	  numval = strtoumax (optarg, &numend, 10);
++ 	  if (! (0 < numval && numval <= SIZE_MAX) || *numend)
++-	    try_help ("invalid width `%s'", optarg);
+++	    try_help ("invalid width '%s'", optarg);
++ 	  if (width != numval)
++ 	    {
++ 	      if (width)
++@@ -534,7 +534,7 @@ main (int argc, char **argv)
++ 	case HORIZON_LINES_OPTION:
++ 	  numval = strtoumax (optarg, &numend, 10);
++ 	  if (*numend)
++-	    try_help ("invalid horizon length `%s'", optarg);
+++	    try_help ("invalid horizon length '%s'", optarg);
++ 	  horizon_lines = MAX (horizon_lines, MIN (numval, LIN_MAX));
++ 	  break;
++ 
++@@ -585,7 +585,7 @@ main (int argc, char **argv)
++ 	case TABSIZE_OPTION:
++ 	  numval = strtoumax (optarg, &numend, 10);
++ 	  if (! (0 < numval && numval <= SIZE_MAX) || *numend)
++-	    try_help ("invalid tabsize `%s'", optarg);
+++	    try_help ("invalid tabsize '%s'", optarg);
++ 	  if (tabsize != numval)
++ 	    {
++ 	      if (tabsize)
++@@ -744,9 +744,9 @@ main (int argc, char **argv)
++ 	  if (argc - optind != 2)
++ 	    {
++ 	      if (argc - optind < 2)
++-		try_help ("missing operand after `%s'", argv[argc - 1]);
+++		try_help ("missing operand after '%s'", argv[argc - 1]);
++ 	      else
++-		try_help ("extra operand `%s'", argv[optind + 2]);
+++		try_help ("extra operand '%s'", argv[optind + 2]);
++ 	    }
++ 
++ 	  exit_status = compare_files (NULL, argv[optind], argv[optind + 1]);
++@@ -826,7 +826,7 @@ try_help (char const *reason_msgid, char const *operand)
++ {
++   if (reason_msgid)
++     error (0, 0, _(reason_msgid), operand);
++-  error (EXIT_TROUBLE, 0, _("Try `%s --help' for more information."),
+++  error (EXIT_TROUBLE, 0, _("Try '%s --help' for more information."),
++ 	 program_name);
++   abort ();
++ }
++@@ -870,11 +870,11 @@ static char const * const option_help_msgid[] = {
++   -W NUM  --width=NUM  Output at most NUM (default 130) print columns.\n\
++   --left-column  Output only the left column of common lines.\n\
++   --suppress-common-lines  Do not output common lines."),
++-  N_("-D NAME  --ifdef=NAME  Output merged file to show `#ifdef NAME' diffs."),
+++  N_("-D NAME  --ifdef=NAME  Output merged file to show '#ifdef NAME' diffs."),
++   N_("--GTYPE-group-format=GFMT  Similar, but format GTYPE input groups with GFMT."),
++   N_("--line-format=LFMT  Similar, but format all input lines with LFMT."),
++   N_("--LTYPE-line-format=LFMT  Similar, but format LTYPE input lines with LFMT."),
++-  N_("  LTYPE is `old', `new', or `unchanged'.  GTYPE is LTYPE or `changed'."),
+++  N_("  LTYPE is 'old', 'new', or 'unchanged'.  GTYPE is LTYPE or 'changed'."),
++   N_("  GFMT may contain:\n\
++     %<  lines from FILE1\n\
++     %>  lines from FILE2\n\
++@@ -895,7 +895,7 @@ static char const * const option_help_msgid[] = {
++     %c'C'  the single character C\n\
++     %c'\\OOO'  the character with octal code OOO"),
++   "",
++-  N_("-l  --paginate  Pass the output through `pr' to paginate it."),
+++  N_("-l  --paginate  Pass the output through 'pr' to paginate it."),
++   N_("-t  --expand-tabs  Expand tabs to spaces in output."),
++   N_("-T  --initial-tab  Make tabs line up by prepending a tab."),
++   N_("--tabsize=NUM  Tab stops are every NUM (default 8) print columns."),
++@@ -918,9 +918,9 @@ static char const * const option_help_msgid[] = {
++   N_("-v  --version  Output version info."),
++   N_("--help  Output this help."),
++   "",
++-  N_("FILES are `FILE1 FILE2' or `DIR1 DIR2' or `DIR FILE...' or `FILE... DIR'."),
+++  N_("FILES are 'FILE1 FILE2' or 'DIR1 DIR2' or 'DIR FILE...' or 'FILE... DIR'."),
++   N_("If --from-file or --to-file is given, there are no restrictions on FILES."),
++-  N_("If a FILE is `-', read standard input."),
+++  N_("If a FILE is '-', read standard input."),
++   N_("Exit status is 0 if inputs are the same, 1 if different, 2 if trouble."),
++   0
++ };
++@@ -960,7 +960,7 @@ specify_value (char const **var, char const *value, char const *option)
++ {
++   if (*var && strcmp (*var, value) != 0)
++     {
++-      error (0, 0, _("conflicting %s option value `%s'"), option, value);
+++      error (0, 0, _("conflicting %s option value '%s'"), option, value);
++       try_help (NULL, NULL);
++     }
++   *var = value;
++@@ -1159,7 +1159,7 @@ compare_files (struct comparison const *parent,
++ 	= dir_file_pathname (dir, last_component (fnm));
++ 
++       if (STREQ (fnm, "-"))
++-	fatal ("cannot compare `-' to a directory");
+++	fatal ("cannot compare '-' to a directory");
++ 
++       if (stat (filename, &cmp.file[dir_arg].stat) != 0)
++ 	{
++diff --git a/src/diff3.c b/src/diff3.c
++index 0f11fdc..fbfb28b 100644
++--- a/src/diff3.c
+++++ b/src/diff3.c
++@@ -316,9 +316,9 @@ main (int argc, char **argv)
++   if (argc - optind != 3)
++     {
++       if (argc - optind < 3)
++-	try_help ("missing operand after `%s'", argv[argc - 1]);
+++	try_help ("missing operand after '%s'", argv[argc - 1]);
++       else
++-	try_help ("extra operand `%s'", argv[optind + 3]);
+++	try_help ("extra operand '%s'", argv[optind + 3]);
++     }
++ 
++   file = &argv[optind];
++@@ -351,7 +351,7 @@ main (int argc, char **argv)
++ 	 file instead.  */
++       common = 3 - common;
++       if (STREQ (file[0], "-") || STREQ (file[common], "-"))
++-	fatal ("`-' specified for more than one input file");
+++	fatal ("'-' specified for more than one input file");
++     }
++ 
++   mapping[0] = 0;
++@@ -412,7 +412,7 @@ try_help (char const *reason_msgid, char const *operand)
++   if (reason_msgid)
++     error (0, 0, _(reason_msgid), operand);
++   error (EXIT_TROUBLE, 0,
++-	 _("Try `%s --help' for more information."), program_name);
+++	 _("Try '%s --help' for more information."), program_name);
++   abort ();
++ }
++ 
++@@ -435,7 +435,7 @@ static char const * const option_help_msgid[] = {
++   "",
++   N_("-m  --merge  Output merged file instead of ed script (default -A)."),
++   N_("-L LABEL  --label=LABEL  Use LABEL instead of file name."),
++-  N_("-i  Append `w' and `q' commands to ed scripts."),
+++  N_("-i  Append 'w' and 'q' commands to ed scripts."),
++   N_("-a  --text  Treat all files as text."),
++   N_("--strip-trailing-cr  Strip trailing carriage return on input."),
++   N_("-T  --initial-tab  Make tabs line up by prepending a tab."),
++@@ -460,7 +460,7 @@ usage (void)
++     else
++       putchar ('\n');
++   printf ("\n%s\n%s\n",
++-	  _("If a FILE is `-', read standard input."),
+++	  _("If a FILE is '-', read standard input."),
++ 	  _("Exit status is 0 if successful, 1 if conflicts, 2 if trouble."));
++   emit_bug_reporting_address ();
++ }
++@@ -1275,12 +1275,12 @@ read_diff (char const *filea,
++   if (EXIT_TROUBLE <= status)
++     error (EXIT_TROUBLE, werrno,
++ 	   _(status == 126
++-	     ? "subsidiary program `%s' could not be invoked"
+++	     ? "subsidiary program '%s' could not be invoked"
++ 	     : status == 127
++-	     ? "subsidiary program `%s' not found"
+++	     ? "subsidiary program '%s' not found"
++ 	     : status == INT_MAX
++-	     ? "subsidiary program `%s' failed"
++-	     : "subsidiary program `%s' failed (exit status %d)"),
+++	     ? "subsidiary program '%s' failed"
+++	     : "subsidiary program '%s' failed (exit status %d)"),
++ 	   diff_program, status);
++ 
++   return diff_result + total;
++diff --git a/src/dir.c b/src/dir.c
++index 5b4eaec..5e08318 100644
++--- a/src/dir.c
+++++ b/src/dir.c
++@@ -154,7 +154,7 @@ compare_names (char const *name1, char const *name2)
++ 	r = strcoll (name1, name2);
++       if (errno)
++ 	{
++-	  error (0, errno, _("cannot compare file names `%s' and `%s'"),
+++	  error (0, errno, _("cannot compare file names '%s' and '%s'"),
++ 		 name1, name2);
++ 	  longjmp (failed_locale_specific_sorting, 1);
++ 	}
++diff --git a/src/sdiff.c b/src/sdiff.c
++index 4344e8d..5bbecd8 100644
++--- a/src/sdiff.c
+++++ b/src/sdiff.c
++@@ -175,7 +175,7 @@ try_help (char const *reason_msgid, char const *operand)
++ {
++   if (reason_msgid)
++     error (0, 0, _(reason_msgid), operand);
++-  error (EXIT_TROUBLE, 0, _("Try `%s --help' for more information."),
+++  error (EXIT_TROUBLE, 0, _("Try '%s --help' for more information."),
++ 	 program_name);
++   abort ();
++ }
++@@ -230,7 +230,7 @@ usage (void)
++     else
++       putchar ('\n');
++   printf ("\n%s\n%s\n",
++-	  _("If a FILE is `-', read standard input."),
+++	  _("If a FILE is '-', read standard input."),
++ 	  _("Exit status is 0 if inputs are the same, 1 if different, 2 if trouble."));
++   emit_bug_reporting_address ();
++ }
++@@ -286,12 +286,12 @@ check_child_status (int werrno, int wstatus, int max_ok_status,
++     {
++       error (0, werrno,
++ 	     _(status == 126
++-	       ? "subsidiary program `%s' could not be invoked"
+++	       ? "subsidiary program '%s' could not be invoked"
++ 	       : status == 127
++-	       ? "subsidiary program `%s' not found"
+++	       ? "subsidiary program '%s' not found"
++ 	       : status == INT_MAX
++-	       ? "subsidiary program `%s' failed"
++-	       : "subsidiary program `%s' failed (exit status %d)"),
+++	       ? "subsidiary program '%s' failed"
+++	       : "subsidiary program '%s' failed (exit status %d)"),
++ 	     subsidiary_program, status);
++       exiterr ();
++     }
++@@ -572,9 +572,9 @@ main (int argc, char *argv[])
++   if (argc - optind != 2)
++     {
++       if (argc - optind < 2)
++-	try_help ("missing operand after `%s'", argv[argc - 1]);
+++	try_help ("missing operand after '%s'", argv[argc - 1]);
++       else
++-	try_help ("extra operand `%s'", argv[optind + 2]);
+++	try_help ("extra operand '%s'", argv[optind + 2]);
++     }
++ 
++   if (! output)
++diff --git a/src/util.c b/src/util.c
++index 3be03e9..d18bf38 100644
++--- a/src/util.c
+++++ b/src/util.c
++@@ -298,12 +298,12 @@ finish_output (void)
++       if (status)
++ 	error (EXIT_TROUBLE, werrno,
++ 	       _(status == 126
++-		 ? "subsidiary program `%s' could not be invoked"
+++		 ? "subsidiary program '%s' could not be invoked"
++ 		 : status == 127
++-		 ? "subsidiary program `%s' not found"
+++		 ? "subsidiary program '%s' not found"
++ 		 : status == INT_MAX
++-		 ? "subsidiary program `%s' failed"
++-		 : "subsidiary program `%s' failed (exit status %d)"),
+++		 ? "subsidiary program '%s' failed"
+++		 : "subsidiary program '%s' failed (exit status %d)"),
++ 	       pr_program, status);
++     }
++ 
+diff --git a/src/.nfs00000000008b36a500000353 b/src/.nfs00000000008b36a500000353
+new file mode 100644
+index 0000000..e69de29
+diff --git a/src/cmp.c b/src/cmp.c
+index 2455dc4..ebf1688 100644
+--- a/src/cmp.c
++++ b/src/cmp.c
+@@ -115,7 +115,7 @@ try_help (char const *reason_msgid, char const *operand)
+   if (reason_msgid)
+     error (0, 0, _(reason_msgid), operand);
+   error (EXIT_TROUBLE, 0,
+-	 _("Try `%s --help' for more information."), program_name);
++	 _("Try '%s --help' for more information."), program_name);
+   abort ();
+ }
+ 
+@@ -134,7 +134,7 @@ specify_ignore_initial (int f, char **argptr, char delimiter)
+   if (! (e == LONGINT_OK
+ 	 || (e == LONGINT_INVALID_SUFFIX_CHAR && **argptr == delimiter))
+       || TYPE_MAXIMUM (off_t) < val)
+-    try_help ("invalid --ignore-initial value `%s'", arg);
++    try_help ("invalid --ignore-initial value '%s'", arg);
+   if (ignore_initial[f] < val)
+     ignore_initial[f] = val;
+ }
+@@ -185,7 +185,7 @@ usage (void)
+ 	  _("SKIP values may be followed by the following multiplicative suffixes:\n\
+ kB 1000, K 1024, MB 1,000,000, M 1,048,576,\n\
+ GB 1,000,000,000, G 1,073,741,824, and so on for T, P, E, Z, Y."),
+-	  _("If a FILE is `-' or missing, read standard input."),
++	  _("If a FILE is '-' or missing, read standard input."),
+ 	  _("Exit status is 0 if inputs are the same, 1 if different, 2 if trouble."));
+   emit_bug_reporting_address ();
+ }
+@@ -231,7 +231,7 @@ main (int argc, char **argv)
+ 	{
+ 	  uintmax_t n;
+ 	  if (xstrtoumax (optarg, 0, 0, &n, valid_suffixes) != LONGINT_OK)
+-	    try_help ("invalid --bytes value `%s'", optarg);
++	    try_help ("invalid --bytes value '%s'", optarg);
+ 	  if (n < bytes)
+ 	    bytes = n;
+ 	}
+@@ -257,7 +257,7 @@ main (int argc, char **argv)
+       }
+ 
+   if (optind == argc)
+-    try_help ("missing operand after `%s'", argv[argc - 1]);
++    try_help ("missing operand after '%s'", argv[argc - 1]);
+ 
+   file[0] = argv[optind++];
+   file[1] = optind < argc ? argv[optind++] : "-";
+@@ -269,7 +269,7 @@ main (int argc, char **argv)
+     }
+ 
+   if (optind < argc)
+-    try_help ("extra operand `%s'", argv[optind]);
++    try_help ("extra operand '%s'", argv[optind]);
+ 
+   for (f = 0; f < 2; f++)
+     {
+@@ -364,8 +364,8 @@ main (int argc, char **argv)
+   return exit_status;
+ }
+ 
+-/* Compare the two files already open on `file_desc[0]' and `file_desc[1]',
+-   using `buffer[0]' and `buffer[1]'.
++/* Compare the two files already open on 'file_desc[0]' and 'file_desc[1]',
++   using 'buffer[0]' and 'buffer[1]'.
+    Return EXIT_SUCCESS if identical, EXIT_FAILURE if different,
+    >1 if error.  */
+ 
+diff --git a/src/diff.c b/src/diff.c
+index cc1b611..256a984 100644
+--- a/src/diff.c
++++ b/src/diff.c
+@@ -330,7 +330,7 @@ main (int argc, char **argv)
+ 	      {
+ 		numval = strtoumax (optarg, &numend, 10);
+ 		if (*numend)
+-		  try_help ("invalid context length `%s'", optarg);
++		  try_help ("invalid context length '%s'", optarg);
+ 		if (LIN_MAX < numval)
+ 		  numval = LIN_MAX;
+ 	      }
+@@ -505,7 +505,7 @@ main (int argc, char **argv)
+ 	case 'W':
+ 	  numval = strtoumax (optarg, &numend, 10);
+ 	  if (! (0 < numval && numval <= SIZE_MAX) || *numend)
+-	    try_help ("invalid width `%s'", optarg);
++	    try_help ("invalid width '%s'", optarg);
+ 	  if (width != numval)
+ 	    {
+ 	      if (width)
+@@ -534,7 +534,7 @@ main (int argc, char **argv)
+ 	case HORIZON_LINES_OPTION:
+ 	  numval = strtoumax (optarg, &numend, 10);
+ 	  if (*numend)
+-	    try_help ("invalid horizon length `%s'", optarg);
++	    try_help ("invalid horizon length '%s'", optarg);
+ 	  horizon_lines = MAX (horizon_lines, MIN (numval, LIN_MAX));
+ 	  break;
+ 
+@@ -585,7 +585,7 @@ main (int argc, char **argv)
+ 	case TABSIZE_OPTION:
+ 	  numval = strtoumax (optarg, &numend, 10);
+ 	  if (! (0 < numval && numval <= SIZE_MAX) || *numend)
+-	    try_help ("invalid tabsize `%s'", optarg);
++	    try_help ("invalid tabsize '%s'", optarg);
+ 	  if (tabsize != numval)
+ 	    {
+ 	      if (tabsize)
+@@ -744,9 +744,9 @@ main (int argc, char **argv)
+ 	  if (argc - optind != 2)
+ 	    {
+ 	      if (argc - optind < 2)
+-		try_help ("missing operand after `%s'", argv[argc - 1]);
++		try_help ("missing operand after '%s'", argv[argc - 1]);
+ 	      else
+-		try_help ("extra operand `%s'", argv[optind + 2]);
++		try_help ("extra operand '%s'", argv[optind + 2]);
+ 	    }
+ 
+ 	  exit_status = compare_files (NULL, argv[optind], argv[optind + 1]);
+@@ -826,7 +826,7 @@ try_help (char const *reason_msgid, char const *operand)
+ {
+   if (reason_msgid)
+     error (0, 0, _(reason_msgid), operand);
+-  error (EXIT_TROUBLE, 0, _("Try `%s --help' for more information."),
++  error (EXIT_TROUBLE, 0, _("Try '%s --help' for more information."),
+ 	 program_name);
+   abort ();
+ }
+@@ -870,11 +870,11 @@ static char const * const option_help_msgid[] = {
+   -W NUM  --width=NUM  Output at most NUM (default 130) print columns.\n\
+   --left-column  Output only the left column of common lines.\n\
+   --suppress-common-lines  Do not output common lines."),
+-  N_("-D NAME  --ifdef=NAME  Output merged file to show `#ifdef NAME' diffs."),
++  N_("-D NAME  --ifdef=NAME  Output merged file to show '#ifdef NAME' diffs."),
+   N_("--GTYPE-group-format=GFMT  Similar, but format GTYPE input groups with GFMT."),
+   N_("--line-format=LFMT  Similar, but format all input lines with LFMT."),
+   N_("--LTYPE-line-format=LFMT  Similar, but format LTYPE input lines with LFMT."),
+-  N_("  LTYPE is `old', `new', or `unchanged'.  GTYPE is LTYPE or `changed'."),
++  N_("  LTYPE is 'old', 'new', or 'unchanged'.  GTYPE is LTYPE or 'changed'."),
+   N_("  GFMT may contain:\n\
+     %<  lines from FILE1\n\
+     %>  lines from FILE2\n\
+@@ -895,7 +895,7 @@ static char const * const option_help_msgid[] = {
+     %c'C'  the single character C\n\
+     %c'\\OOO'  the character with octal code OOO"),
+   "",
+-  N_("-l  --paginate  Pass the output through `pr' to paginate it."),
++  N_("-l  --paginate  Pass the output through 'pr' to paginate it."),
+   N_("-t  --expand-tabs  Expand tabs to spaces in output."),
+   N_("-T  --initial-tab  Make tabs line up by prepending a tab."),
+   N_("--tabsize=NUM  Tab stops are every NUM (default 8) print columns."),
+@@ -918,9 +918,9 @@ static char const * const option_help_msgid[] = {
+   N_("-v  --version  Output version info."),
+   N_("--help  Output this help."),
+   "",
+-  N_("FILES are `FILE1 FILE2' or `DIR1 DIR2' or `DIR FILE...' or `FILE... DIR'."),
++  N_("FILES are 'FILE1 FILE2' or 'DIR1 DIR2' or 'DIR FILE...' or 'FILE... DIR'."),
+   N_("If --from-file or --to-file is given, there are no restrictions on FILES."),
+-  N_("If a FILE is `-', read standard input."),
++  N_("If a FILE is '-', read standard input."),
+   N_("Exit status is 0 if inputs are the same, 1 if different, 2 if trouble."),
+   0
+ };
+@@ -960,7 +960,7 @@ specify_value (char const **var, char const *value, char const *option)
+ {
+   if (*var && strcmp (*var, value) != 0)
+     {
+-      error (0, 0, _("conflicting %s option value `%s'"), option, value);
++      error (0, 0, _("conflicting %s option value '%s'"), option, value);
+       try_help (NULL, NULL);
+     }
+   *var = value;
+@@ -1159,7 +1159,7 @@ compare_files (struct comparison const *parent,
+ 	= dir_file_pathname (dir, last_component (fnm));
+ 
+       if (STREQ (fnm, "-"))
+-	fatal ("cannot compare `-' to a directory");
++	fatal ("cannot compare '-' to a directory");
+ 
+       if (stat (filename, &cmp.file[dir_arg].stat) != 0)
+ 	{
+diff --git a/src/diff3.c b/src/diff3.c
+index 0f11fdc..fbfb28b 100644
+--- a/src/diff3.c
++++ b/src/diff3.c
+@@ -316,9 +316,9 @@ main (int argc, char **argv)
+   if (argc - optind != 3)
+     {
+       if (argc - optind < 3)
+-	try_help ("missing operand after `%s'", argv[argc - 1]);
++	try_help ("missing operand after '%s'", argv[argc - 1]);
+       else
+-	try_help ("extra operand `%s'", argv[optind + 3]);
++	try_help ("extra operand '%s'", argv[optind + 3]);
+     }
+ 
+   file = &argv[optind];
+@@ -351,7 +351,7 @@ main (int argc, char **argv)
+ 	 file instead.  */
+       common = 3 - common;
+       if (STREQ (file[0], "-") || STREQ (file[common], "-"))
+-	fatal ("`-' specified for more than one input file");
++	fatal ("'-' specified for more than one input file");
+     }
+ 
+   mapping[0] = 0;
+@@ -412,7 +412,7 @@ try_help (char const *reason_msgid, char const *operand)
+   if (reason_msgid)
+     error (0, 0, _(reason_msgid), operand);
+   error (EXIT_TROUBLE, 0,
+-	 _("Try `%s --help' for more information."), program_name);
++	 _("Try '%s --help' for more information."), program_name);
+   abort ();
+ }
+ 
+@@ -435,7 +435,7 @@ static char const * const option_help_msgid[] = {
+   "",
+   N_("-m  --merge  Output merged file instead of ed script (default -A)."),
+   N_("-L LABEL  --label=LABEL  Use LABEL instead of file name."),
+-  N_("-i  Append `w' and `q' commands to ed scripts."),
++  N_("-i  Append 'w' and 'q' commands to ed scripts."),
+   N_("-a  --text  Treat all files as text."),
+   N_("--strip-trailing-cr  Strip trailing carriage return on input."),
+   N_("-T  --initial-tab  Make tabs line up by prepending a tab."),
+@@ -460,7 +460,7 @@ usage (void)
+     else
+       putchar ('\n');
+   printf ("\n%s\n%s\n",
+-	  _("If a FILE is `-', read standard input."),
++	  _("If a FILE is '-', read standard input."),
+ 	  _("Exit status is 0 if successful, 1 if conflicts, 2 if trouble."));
+   emit_bug_reporting_address ();
+ }
+@@ -1275,12 +1275,12 @@ read_diff (char const *filea,
+   if (EXIT_TROUBLE <= status)
+     error (EXIT_TROUBLE, werrno,
+ 	   _(status == 126
+-	     ? "subsidiary program `%s' could not be invoked"
++	     ? "subsidiary program '%s' could not be invoked"
+ 	     : status == 127
+-	     ? "subsidiary program `%s' not found"
++	     ? "subsidiary program '%s' not found"
+ 	     : status == INT_MAX
+-	     ? "subsidiary program `%s' failed"
+-	     : "subsidiary program `%s' failed (exit status %d)"),
++	     ? "subsidiary program '%s' failed"
++	     : "subsidiary program '%s' failed (exit status %d)"),
+ 	   diff_program, status);
+ 
+   return diff_result + total;
+diff --git a/src/dir.c b/src/dir.c
+index 5b4eaec..5e08318 100644
+--- a/src/dir.c
++++ b/src/dir.c
+@@ -154,7 +154,7 @@ compare_names (char const *name1, char const *name2)
+ 	r = strcoll (name1, name2);
+       if (errno)
+ 	{
+-	  error (0, errno, _("cannot compare file names `%s' and `%s'"),
++	  error (0, errno, _("cannot compare file names '%s' and '%s'"),
+ 		 name1, name2);
+ 	  longjmp (failed_locale_specific_sorting, 1);
+ 	}
+diff --git a/src/sdiff.c b/src/sdiff.c
+index 4344e8d..5bbecd8 100644
+--- a/src/sdiff.c
++++ b/src/sdiff.c
+@@ -175,7 +175,7 @@ try_help (char const *reason_msgid, char const *operand)
+ {
+   if (reason_msgid)
+     error (0, 0, _(reason_msgid), operand);
+-  error (EXIT_TROUBLE, 0, _("Try `%s --help' for more information."),
++  error (EXIT_TROUBLE, 0, _("Try '%s --help' for more information."),
+ 	 program_name);
+   abort ();
+ }
+@@ -230,7 +230,7 @@ usage (void)
+     else
+       putchar ('\n');
+   printf ("\n%s\n%s\n",
+-	  _("If a FILE is `-', read standard input."),
++	  _("If a FILE is '-', read standard input."),
+ 	  _("Exit status is 0 if inputs are the same, 1 if different, 2 if trouble."));
+   emit_bug_reporting_address ();
+ }
+@@ -286,12 +286,12 @@ check_child_status (int werrno, int wstatus, int max_ok_status,
+     {
+       error (0, werrno,
+ 	     _(status == 126
+-	       ? "subsidiary program `%s' could not be invoked"
++	       ? "subsidiary program '%s' could not be invoked"
+ 	       : status == 127
+-	       ? "subsidiary program `%s' not found"
++	       ? "subsidiary program '%s' not found"
+ 	       : status == INT_MAX
+-	       ? "subsidiary program `%s' failed"
+-	       : "subsidiary program `%s' failed (exit status %d)"),
++	       ? "subsidiary program '%s' failed"
++	       : "subsidiary program '%s' failed (exit status %d)"),
+ 	     subsidiary_program, status);
+       exiterr ();
+     }
+@@ -572,9 +572,9 @@ main (int argc, char *argv[])
+   if (argc - optind != 2)
+     {
+       if (argc - optind < 2)
+-	try_help ("missing operand after `%s'", argv[argc - 1]);
++	try_help ("missing operand after '%s'", argv[argc - 1]);
+       else
+-	try_help ("extra operand `%s'", argv[optind + 2]);
++	try_help ("extra operand '%s'", argv[optind + 2]);
+     }
+ 
+   if (! output)
+diff --git a/src/util.c b/src/util.c
+index 3be03e9..d18bf38 100644
+--- a/src/util.c
++++ b/src/util.c
+@@ -298,12 +298,12 @@ finish_output (void)
+       if (status)
+ 	error (EXIT_TROUBLE, werrno,
+ 	       _(status == 126
+-		 ? "subsidiary program `%s' could not be invoked"
++		 ? "subsidiary program '%s' could not be invoked"
+ 		 : status == 127
+-		 ? "subsidiary program `%s' not found"
++		 ? "subsidiary program '%s' not found"
+ 		 : status == INT_MAX
+-		 ? "subsidiary program `%s' failed"
+-		 : "subsidiary program `%s' failed (exit status %d)"),
++		 ? "subsidiary program '%s' failed"
++		 : "subsidiary program '%s' failed (exit status %d)"),
+ 	       pr_program, status);
+     }
+ 
+-- 
+2.14.2
+

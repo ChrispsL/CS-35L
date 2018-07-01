@@ -1,0 +1,134 @@
+1) Clone Diffutils repo
+git clone ~eggert/src/gnu/diffutils
+
+2) Go into repo and make log/tag file
+git log > git-log.txt
+git tag > git-tags.txt
+
+3) Get the commit "maint: quote 'like this' or "like this", not `likethis'" and generate patch
+git log --grep "maint: quote 'like this' or \"like this\""
+git format-patch -1 --stdout 62ca21c8c1a5aa3488589dcb191a4ef04ae9ed4f          \
+> quote-patch.txt
+
+4) Checkout version 3.0 and apply this patch
+git checkout v3.0
+patch -p1 < quote-patch.txt
+There were no problems patching, except for having to skip over HACKING, doc/diffutils.texi, and man/help2man
+
+5) git status to see the changes/overview
+Output:
+HEAD detached at v3.0
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   NEWS
+        modified:   README
+        modified:   TODO
+        modified:   doc/diagmeet.note
+        modified:   ms/config.bat
+        modified:   ms/config.site
+        modified:   po/en.po
+        modified:   src/analyze.c
+        modified:   src/cmp.c
+        modified:   src/context.c
+        modified:   src/diff.c
+        modified:   src/diff.h
+        modified:   src/diff3.c
+        modified:   src/dir.c
+        modified:   src/ifdef.c
+        modified:   src/io.c
+        modified:   src/sdiff.c
+        modified:   src/side.c
+        modified:   src/system.h
+        modified:   src/util.c
+        modified:   tests/help-version
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        NEWS.orig
+        README-hacking.orig
+        README-hacking.rej
+        README.orig
+        README.rej
+        cfg.mk.orig
+        cfg.mk.rej
+        ms/config.site.orig
+        quote-patch.txt
+        src/cmp.c.orig
+        src/context.c.orig
+        src/diff.c.orig
+        src/diff.c.rej
+        src/diff.h.orig
+        src/diff3.c.orig
+        src/diff3.c.rej
+        src/dir.c.orig
+        src/sdiff.c.orig
+        src/system.h.orig
+        src/util.c.orig
+        tests/help-version.orig
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+6) Revert all changes other than .c files by using emacs to edit each of the following files:
+emacs NEWS, emacs README, emacs TODO; emacs doc/diagmeet.note, emacs ms/config.bat, emacs ms/config.site, emacs po/en.po,
+emacs src/diff.h, emacs src/system.h, emacs tests/help-version
+
+Using vc-diff (C-x v =) to see the changes and vc-revert (C-x v u) to revert those changes
+
+7) Remove all purely comment changes in .c files by editing the following files with emacs:
+emacs src/analyze.c, emacs src/cmp.c, emacs src/context.c, emacs src/diff.c, emacs src/diff3.c, emacs src/dir.c,
+emacs src/ifdef.c, emacs src/io.c, emacs src/sdiff.c, emacs src/side.c, emacs src/util.c
+
+Using vc-diff and the undo version of diff-apply-hunk (C-u C-c C-a) to revert all comment changes.
+
+8) Checking src/*.c.rej, src/diff.c has 5 rejected patches and diff3.c has 1.
+I just copied the rejected patches into the corresponding .c files
+
+9) Remove all untracked files
+git clean -f
+git status
+Output:
+HEAD detached at v3.0
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   src/cmp.c
+        modified:   src/diff.c
+        modified:   src/diff3.c
+        modified:   src/dir.c
+        modified:   src/sdiff.c
+        modified:   src/util.c
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        .lab9.txt.swp
+        .quote-3.0-patch.txt.swp
+        quote-3.0-patch.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+10) Put these modifications into an output patch quote-3.0-patch.txt
+git diff > quote-3.0-patch.txt
+The file is 337 lines long
+
+11) To build the modified version of Diffutils, I looked in README-hacking and ran these commands
+./bootstrap
+./configure
+make
+make check
+
+when I ran make the first time, I got an error regarding gets, so I had to download and patch with the diffutils-gets.diff and rerun make
+
+12) "diff . -" and "diff --help" correctly had the fixed output with single quotes rather than grave characters `
+
+13) Then I cloned and checked out the v3.0 repo in another folder and got the source files, copied them into diffutils-3.0
+I copied my modified source files into diffutils-3.0-patch.
+I ran diff -pru diffutils-3.0 diffutils-3.0-patch >quote-3.0-test.txt
+Then diff quote-3.0-test.txt quote-3.0-patch.txt > quoteDifferences.txt
+
+The files are not identical. There are many changes, mostly with the ` character fixes.
+These are not innocuous changes because the logic of the code is affected.
